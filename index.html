@@ -1,958 +1,20 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VELOUR — Moda Feminina</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --cream: #f5f0e8;
-    --warm-white: #faf8f4;
-    --charcoal: #1a1a1a;
-    --deep: #0d0d0d;
-    --gold: #c9a96e;
-    --gold-light: #e8d5b0;
-    --rose: #c4876b;
-    --muted: #8a8278;
-    --border: #e0d8cc;
-    --card-bg: #ffffff;
-    --success: #5a8a6a;
-    --danger: #a05050;
-    --pix: #32bcad;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Montserrat', sans-serif;
-    background: var(--cream);
-    color: var(--charcoal);
-    min-height: 100vh;
-    font-size: 14px;
-  }
-
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--cream); }
-  ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
-
-  /* ── HEADER ── */
-  header {
-    background: var(--deep);
-    color: var(--cream);
-    padding: 0 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 70px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    border-bottom: 1px solid #2a2a2a;
-  }
-
-  .logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    font-weight: 300;
-    letter-spacing: 8px;
-    color: var(--gold);
-    cursor: pointer;
-  }
-
-  nav { display: flex; gap: 6px; }
-
-  nav button {
-    background: none;
-    border: none;
-    color: var(--cream);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    padding: 8px 14px;
-    border-radius: 2px;
-    transition: all 0.2s;
-    opacity: 0.7;
-  }
-
-  nav button:hover, nav button.active {
-    opacity: 1;
-    background: rgba(201,169,110,0.15);
-    color: var(--gold);
-  }
-
-  .header-right { display: flex; align-items: center; gap: 14px; }
-
-  .cart-btn {
-    background: var(--gold);
-    color: var(--deep);
-    border: none;
-    padding: 10px 20px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 2px;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .cart-btn:hover { background: var(--gold-light); }
-
-  .cart-count {
-    background: var(--rose);
-    color: white;
-    border-radius: 50%;
-    width: 18px;
-    height: 18px;
-    font-size: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-  }
-
-  .admin-nav-btn {
-    background: none;
-    border: 1px solid rgba(201,169,110,0.3);
-    color: var(--gold);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    padding: 8px 14px;
-    border-radius: 2px;
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .admin-nav-btn:hover { background: rgba(201,169,110,0.1); }
-
-  /* ── PAGES ── */
-  .page { display: none; }
-  .page.active { display: block; }
-
-  /* ── HERO ── */
-  .hero {
-    background: var(--deep);
-    color: var(--cream);
-    text-align: center;
-    padding: 100px 40px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(ellipse at center, rgba(201,169,110,0.08) 0%, transparent 60%);
-    animation: pulse 6s ease-in-out infinite;
-  }
-
-  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.05)} }
-
-  .hero-tag {
-    font-size: 11px;
-    letter-spacing: 4px;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 20px;
-    position: relative;
-  }
-
-  .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(52px, 8vw, 100px);
-    font-weight: 300;
-    line-height: 0.9;
-    letter-spacing: -2px;
-    margin-bottom: 24px;
-    position: relative;
-  }
-
-  .hero h1 em { font-style: italic; color: var(--gold); }
-
-  .hero p {
-    font-size: 13px;
-    letter-spacing: 1px;
-    color: rgba(245,240,232,0.6);
-    margin-bottom: 40px;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.8;
-    position: relative;
-  }
-
-  .hero-btn {
-    background: transparent;
-    border: 1px solid var(--gold);
-    color: var(--gold);
-    padding: 14px 40px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 2px;
-    transition: all 0.3s;
-    position: relative;
-  }
-
-  .hero-btn:hover { background: var(--gold); color: var(--deep); }
-
-  /* ── SECTION ── */
-  .section { padding: 60px 40px; }
-
-  .section-header {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    margin-bottom: 40px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .section-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 36px;
-    font-weight: 400;
-    color: var(--charcoal);
-  }
-
-  .section-subtitle {
-    font-size: 11px;
-    letter-spacing: 2px;
-    color: var(--muted);
-    text-transform: uppercase;
-  }
-
-  /* ── FILTERS ── */
-  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 30px; }
-
-  .filter-btn {
-    background: none;
-    border: 1px solid var(--border);
-    color: var(--muted);
-    padding: 7px 16px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 2px;
-    transition: all 0.2s;
-  }
-
-  .filter-btn:hover, .filter-btn.active {
-    background: var(--charcoal);
-    border-color: var(--charcoal);
-    color: var(--cream);
-  }
-
-  /* ── PRODUCT GRID ── */
-  .products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 24px;
-  }
-
-  .product-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-    transition: all 0.3s;
-  }
-
-  .product-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
-    border-color: var(--gold);
-  }
-
-  .product-img {
-    width: 100%;
-    height: 260px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 80px;
-    background: linear-gradient(135deg, var(--cream) 0%, var(--gold-light) 100%);
-    position: relative;
-  }
-
-  .product-badge {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    background: var(--rose);
-    color: white;
-    font-size: 9px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 4px 10px;
-    border-radius: 2px;
-  }
-
-  .product-info { padding: 18px; }
-  .product-cat { font-size: 10px; letter-spacing: 2px; color: var(--gold); text-transform: uppercase; margin-bottom: 6px; }
-  .product-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; margin-bottom: 4px; color: var(--charcoal); }
-  .product-price { font-size: 15px; font-weight: 600; color: var(--charcoal); margin-bottom: 14px; }
-  .product-price .old-price { font-size: 12px; font-weight: 300; color: var(--muted); text-decoration: line-through; margin-right: 8px; }
-
-  .add-btn {
-    width: 100%;
-    background: var(--charcoal);
-    color: var(--cream);
-    border: none;
-    padding: 11px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 2px;
-    transition: all 0.2s;
-  }
-
-  .add-btn:hover { background: var(--gold); color: var(--deep); }
-
-  .stock { font-size: 10px; letter-spacing: 1px; margin-bottom: 10px; }
-  .stock.ok  { color: var(--success); }
-  .stock.low { color: var(--rose); }
-  .stock.out { color: var(--danger); }
-
-  /* ── CART ── */
-  .cart-layout {
-    display: grid;
-    grid-template-columns: 1fr 360px;
-    gap: 30px;
-    padding: 60px 40px;
-  }
-
-  .cart-items { display: flex; flex-direction: column; gap: 16px; }
-
-  .cart-item {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 20px;
-    display: grid;
-    grid-template-columns: 70px 1fr auto;
-    gap: 16px;
-    align-items: center;
-  }
-
-  .cart-item-emoji {
-    width: 70px; height: 70px;
-    background: linear-gradient(135deg, var(--cream), var(--gold-light));
-    border-radius: 4px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 32px;
-  }
-
-  .cart-item-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; margin-bottom: 4px; }
-  .cart-item-price { font-size: 13px; color: var(--gold); font-weight: 600; }
-
-  .qty-ctrl { display: flex; align-items: center; gap: 10px; margin-top: 10px; }
-
-  .qty-btn {
-    background: var(--cream);
-    border: 1px solid var(--border);
-    width: 28px; height: 28px;
-    border-radius: 2px;
-    cursor: pointer;
-    font-size: 16px;
-    display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s;
-    font-weight: 600;
-  }
-
-  .qty-btn:hover { background: var(--charcoal); color: var(--cream); border-color: var(--charcoal); }
-  .qty-num { font-weight: 600; font-size: 15px; min-width: 20px; text-align: center; }
-
-  .remove-btn {
-    background: none; border: none; color: var(--muted);
-    cursor: pointer; font-size: 18px; transition: color 0.2s; padding: 4px;
-  }
-  .remove-btn:hover { color: var(--danger); }
-
-  /* ── ORDER SUMMARY ── */
-  .order-summary {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 28px;
-    height: fit-content;
-    position: sticky;
-    top: 90px;
-  }
-
-  .summary-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
-  .summary-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 13px; color: var(--muted); }
-  .summary-total { display: flex; justify-content: space-between; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); font-weight: 700; font-size: 16px; color: var(--charcoal); }
-
-  /* Payment method tabs */
-  .pay-tabs { display: flex; gap: 8px; margin: 20px 0 16px; }
-
-  .pay-tab {
-    flex: 1;
-    background: var(--cream);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 10px 6px;
-    cursor: pointer;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--muted);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    transition: all 0.2s;
-    border-bottom: 2px solid transparent;
-  }
-
-  .pay-tab .pay-icon { font-size: 20px; }
-  .pay-tab:hover { border-color: var(--gold); color: var(--charcoal); }
-  .pay-tab.active { border-color: var(--gold); border-bottom-color: var(--gold); background: #fff; color: var(--charcoal); }
-  .pay-tab.pix-tab.active { border-color: var(--pix); border-bottom-color: var(--pix); }
-
-  .pay-panel { display: none; }
-  .pay-panel.active { display: block; }
-
-  /* PIX panel */
-  .pix-box {
-    background: linear-gradient(135deg, #f0fffe, #e6f9f7);
-    border: 1px solid var(--pix);
-    border-radius: 6px;
-    padding: 20px;
-    text-align: center;
-    margin-bottom: 6px;
-  }
-
-  .pix-logo {
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: var(--pix);
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-  }
-
-  .pix-qr {
-    width: 130px;
-    height: 130px;
-    margin: 0 auto 14px;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    color: var(--muted);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .pix-key-label { font-size: 10px; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; margin-bottom: 6px; }
-
-  .pix-key-box {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 10px 12px;
-    margin-bottom: 8px;
-  }
-
-  .pix-key { flex: 1; font-size: 12px; font-weight: 600; color: var(--charcoal); word-break: break-all; text-align: left; }
-
-  .copy-btn {
-    background: var(--pix);
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 3px;
-    font-size: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    letter-spacing: 1px;
-    white-space: nowrap;
-    transition: opacity 0.2s;
-  }
-
-  .copy-btn:hover { opacity: 0.85; }
-
-  .pix-info { font-size: 10px; color: var(--muted); line-height: 1.7; }
-
-  /* Card panel */
-  .card-panel input {
-    width: 100%;
-    background: var(--cream);
-    border: 1px solid var(--border);
-    padding: 10px 14px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    color: var(--charcoal);
-    border-radius: 2px;
-    outline: none;
-    transition: border-color 0.2s;
-    margin-bottom: 10px;
-  }
-
-  .card-panel input:focus { border-color: var(--gold); }
-  .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-
-  .checkout-btn {
-    width: 100%;
-    background: var(--gold);
-    color: var(--deep);
-    border: none;
-    padding: 15px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 2px;
-    margin-top: 14px;
-    transition: all 0.2s;
-  }
-
-  .checkout-btn:hover { background: var(--charcoal); color: var(--cream); }
-  .checkout-btn.pix-confirm { background: var(--pix); color: white; }
-  .checkout-btn.pix-confirm:hover { background: #27a99b; }
-
-  .empty-cart { text-align: center; padding: 80px 40px; color: var(--muted); }
-  .empty-cart-icon { font-size: 64px; margin-bottom: 20px; opacity: 0.4; }
-  .empty-cart h3 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; color: var(--charcoal); margin-bottom: 10px; }
-
-  /* ── STATS ── */
-  .stats-bar {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
-    padding: 0 40px 40px;
-  }
-
-  .stat-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 22px 24px;
-    border-top: 3px solid var(--gold);
-  }
-
-  .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: var(--charcoal); }
-  .stat-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
-
-  /* ── LOGIN OVERLAY ── */
-  .login-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(13,13,13,0.92);
-    z-index: 300;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(8px);
-    animation: fadeIn 0.3s ease;
-  }
-
-  @keyframes fadeIn { from{opacity:0} to{opacity:1} }
-  @keyframes slideUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
-
-  .login-box {
-    background: var(--card-bg);
-    border-radius: 8px;
-    padding: 48px 44px;
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-    animation: slideUp 0.35s ease;
-    position: relative;
-  }
-
-  .login-logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 32px;
-    font-weight: 300;
-    letter-spacing: 8px;
-    color: var(--gold);
-    margin-bottom: 6px;
-  }
-
-  .login-subtitle {
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: var(--muted);
-    text-transform: uppercase;
-    margin-bottom: 32px;
-  }
-
-  .login-box label {
-    display: block;
-    text-align: left;
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 6px;
-    font-weight: 500;
-  }
-
-  .login-box input {
-    width: 100%;
-    background: var(--cream);
-    border: 1px solid var(--border);
-    padding: 12px 16px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    color: var(--charcoal);
-    border-radius: 3px;
-    outline: none;
-    transition: border-color 0.2s;
-    margin-bottom: 18px;
-  }
-
-  .login-box input:focus { border-color: var(--gold); }
-
-  .login-btn {
-    width: 100%;
-    background: var(--charcoal);
-    color: var(--cream);
-    border: none;
-    padding: 14px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 3px;
-    transition: all 0.2s;
-    margin-top: 4px;
-  }
-
-  .login-btn:hover { background: var(--gold); color: var(--deep); }
-
-  .login-error {
-    color: var(--danger);
-    font-size: 11px;
-    margin-top: 12px;
-    min-height: 16px;
-    letter-spacing: 0.5px;
-  }
-
-  .login-close {
-    position: absolute;
-    top: 16px; right: 18px;
-    background: none; border: none;
-    color: var(--muted);
-    font-size: 20px;
-    cursor: pointer;
-    transition: color 0.2s;
-  }
-
-  .login-close:hover { color: var(--charcoal); }
-
-  .login-hint {
-    margin-top: 20px;
-    padding: 12px 16px;
-    background: var(--cream);
-    border-radius: 4px;
-    font-size: 11px;
-    color: var(--muted);
-    line-height: 1.7;
-    text-align: left;
-  }
-
-  .admin-logged-badge {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 10px;
-    color: var(--success);
-    letter-spacing: 1px;
-  }
-
-  /* ── ADMIN PAGE ── */
-  .admin-layout {
-    padding: 60px 40px;
-    display: grid;
-    grid-template-columns: 380px 1fr;
-    gap: 40px;
-  }
-
-  .admin-form {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 28px;
-    height: fit-content;
-    position: sticky;
-    top: 90px;
-  }
-
-  .form-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; margin-bottom: 24px; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
-  .form-group { margin-bottom: 16px; }
-
-  label {
-    display: block;
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 6px;
-    font-weight: 500;
-  }
-
-  input, select, textarea {
-    width: 100%;
-    background: var(--cream);
-    border: 1px solid var(--border);
-    padding: 10px 14px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    color: var(--charcoal);
-    border-radius: 2px;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-
-  input:focus, select:focus, textarea:focus { border-color: var(--gold); }
-  textarea { resize: vertical; min-height: 80px; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-
-  .submit-btn {
-    width: 100%;
-    background: var(--charcoal);
-    color: var(--cream);
-    border: none;
-    padding: 13px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 2px;
-    transition: all 0.2s;
-    margin-top: 6px;
-  }
-
-  .submit-btn:hover { background: var(--gold); color: var(--deep); }
-
-  /* Admin config bar */
-  .admin-config-bar {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 16px 20px;
-    margin-bottom: 24px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-
-  .config-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
-
-  .config-input {
-    flex: 1;
-    min-width: 160px;
-    background: var(--cream);
-    border: 1px solid var(--border);
-    padding: 8px 12px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
-    color: var(--charcoal);
-    border-radius: 2px;
-    outline: none;
-  }
-
-  .config-input:focus { border-color: var(--gold); }
-  .config-save-btn {
-    background: var(--gold);
-    color: var(--deep);
-    border: none;
-    padding: 8px 18px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 2px;
-    transition: all 0.2s;
-    white-space: nowrap;
-  }
-
-  .config-save-btn:hover { background: var(--charcoal); color: var(--cream); }
-
-  /* TABLE */
-  .admin-table-wrap { background: var(--card-bg); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
-
-  table { width: 100%; border-collapse: collapse; }
-
-  th {
-    background: var(--charcoal);
-    color: var(--cream);
-    padding: 14px 16px;
-    text-align: left;
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-
-  td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 13px; vertical-align: middle; }
-  tr:last-child td { border-bottom: none; }
-  tr:hover td { background: var(--cream); }
-  .td-emoji { font-size: 22px; }
-
-  .action-btns { display: flex; gap: 8px; }
-
-  .edit-btn {
-    background: var(--gold); color: var(--deep); border: none;
-    padding: 5px 12px; font-size: 10px; font-weight: 600; letter-spacing: 1px;
-    border-radius: 2px; cursor: pointer; transition: all 0.2s;
-  }
-
-  .del-btn {
-    background: var(--danger); color: white; border: none;
-    padding: 5px 12px; font-size: 10px; font-weight: 600; letter-spacing: 1px;
-    border-radius: 2px; cursor: pointer; transition: all 0.2s;
-  }
-
-  .edit-btn:hover { background: var(--charcoal); color: var(--cream); }
-  .del-btn:hover { background: #7a2020; }
-
-  /* ── MODAL ── */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.7);
-    z-index: 200;
-    align-items: center;
-    justify-content: center;
-    backdrop-filter: blur(4px);
-  }
-
-  .modal-overlay.open { display: flex; }
-
-  .modal {
-    background: var(--card-bg);
-    border-radius: 6px;
-    padding: 36px;
-    max-width: 460px;
-    width: 90%;
-    text-align: center;
-  }
-
-  .modal h3 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 10px; }
-  .modal p { color: var(--muted); font-size: 13px; line-height: 1.8; margin-bottom: 16px; }
-  .modal-emoji { font-size: 54px; margin-bottom: 18px; }
-  .modal-btns { display: flex; gap: 12px; justify-content: center; }
-
-  .modal-btn {
-    padding: 12px 28px; border-radius: 2px; border: none;
-    font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600;
-    letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: all 0.2s;
-  }
-
-  .modal-btn.primary { background: var(--gold); color: var(--deep); }
-  .modal-btn.secondary { background: var(--cream); color: var(--charcoal); border: 1px solid var(--border); }
-  .modal-btn:hover { opacity: 0.85; }
-
-  /* PIX modal details */
-  .modal-pix-detail {
-    background: #f0fffe;
-    border: 1px solid var(--pix);
-    border-radius: 6px;
-    padding: 16px 20px;
-    margin: 14px 0;
-    font-size: 12px;
-    color: var(--charcoal);
-    line-height: 2;
-    text-align: left;
-  }
-
-  .modal-pix-detail strong { color: var(--pix); }
-
-  /* ── TOAST ── */
-  #toast {
-    position: fixed;
-    bottom: 30px; right: 30px;
-    background: var(--charcoal);
-    color: var(--cream);
-    padding: 14px 24px;
-    border-radius: 4px;
-    font-size: 13px;
-    letter-spacing: 0.5px;
-    border-left: 3px solid var(--gold);
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.4s;
-    z-index: 999;
-    pointer-events: none;
-  }
-
-  #toast.show { opacity: 1; transform: translateY(0); }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    header { padding: 0 20px; }
-    .logo { font-size: 20px; letter-spacing: 5px; }
-    nav { display: none; }
-    .cart-layout, .admin-layout { grid-template-columns: 1fr; padding: 30px 20px; }
-    .section { padding: 40px 20px; }
-    .stats-bar { grid-template-columns: 1fr 1fr; padding: 0 20px 30px; }
-    .hero { padding: 60px 20px; }
-    .admin-form { position: static; }
-    .order-summary { position: static; }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VELOUR — Moda</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<!-- HEADER -->
+<!-- ══ HEADER ══ -->
 <header>
   <div class="logo" onclick="showPage('home')">VELOUR</div>
   <nav>
     <button class="active" onclick="showPage('home')">Início</button>
+    <button onclick="showPage('feminino')">Feminino</button>
+    <button onclick="showPage('masculino')">Masculino</button>
     <button onclick="showPage('loja')">Coleção</button>
     <button onclick="goAdmin()">Admin</button>
   </nav>
@@ -972,13 +34,37 @@
 
 <!-- ══ HOME ══ -->
 <div id="page-home" class="page active">
+
   <div class="hero">
     <p class="hero-tag">Nova Coleção 2025</p>
     <h1>Moda que<br><em>fala por você</em></h1>
-    <p>Peças exclusivas com design atemporal.<br>Elegância que se adapta ao seu estilo de vida.</p>
-    <button class="hero-btn" onclick="showPage('loja')">Explorar Coleção</button>
+    <p>Peças exclusivas com design atemporal.<br>Elegância para todos os estilos de vida.</p>
+    <div class="hero-actions">
+      <button class="hero-btn fem" onclick="showPage('feminino')">♀ Feminino</button>
+      <button class="hero-btn masc" onclick="showPage('masculino')">♂ Masculino</button>
+      <button class="hero-btn" onclick="showPage('loja')">Ver Tudo</button>
+    </div>
   </div>
+
   <div class="stats-bar" id="statsBar"></div>
+
+  <!-- Banners de Gênero -->
+  <div style="position:relative">
+    <div class="gender-split">
+      <div class="gender-panel feminino" onclick="showPage('feminino')">
+        <div class="gender-panel-icon">👗</div>
+        <div class="gender-panel-label">Feminino</div>
+        <div class="gender-panel-sub">Explorar coleção</div>
+      </div>
+      <div class="gender-panel masculino" onclick="showPage('masculino')">
+        <div class="gender-panel-icon">👔</div>
+        <div class="gender-panel-label">Masculino</div>
+        <div class="gender-panel-sub">Explorar coleção</div>
+      </div>
+    </div>
+    <div class="gender-divider"></div>
+  </div>
+
   <div class="section">
     <div class="section-header">
       <h2 class="section-title">Destaques</h2>
@@ -986,15 +72,57 @@
     </div>
     <div class="products-grid" id="featuredGrid"></div>
   </div>
+
 </div>
 
-<!-- ══ LOJA ══ -->
+<!-- ══ FEMININO ══ -->
+<div id="page-feminino" class="page">
+  <div class="hero" style="background:linear-gradient(135deg,#2a1a16 0%,#3d2318 50%,#1a0f0c 100%)">
+    <p class="hero-tag" style="color:var(--fem)">Coleção Feminina</p>
+    <h1>Elegância que<br><em style="color:var(--fem)">te define</em></h1>
+    <p>Peças pensadas para a mulher moderna.<br>Estilo, conforto e sofisticação.</p>
+    <div class="hero-actions">
+      <button class="hero-btn fem" onclick="showPage('loja','Feminino')">Explorar Tudo</button>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title" style="color:var(--fem)">Coleção Feminina</h2>
+      <span class="section-subtitle gender-product-count">0 peças</span>
+    </div>
+    <div class="filters gender-filter-bar"></div>
+    <div class="products-grid gender-products-grid"></div>
+  </div>
+</div>
+
+<!-- ══ MASCULINO ══ -->
+<div id="page-masculino" class="page">
+  <div class="hero" style="background:linear-gradient(135deg,#0f1a24 0%,#172333 50%,#0a1018 100%)">
+    <p class="hero-tag" style="color:var(--masc)">Coleção Masculina</p>
+    <h1>Estilo com<br><em style="color:var(--masc)">presença</em></h1>
+    <p>Roupas para o homem que sabe o que quer.<br>Qualidade e sofisticação em cada peça.</p>
+    <div class="hero-actions">
+      <button class="hero-btn masc" onclick="showPage('loja','Masculino')">Explorar Tudo</button>
+    </div>
+  </div>
+  <div class="section">
+    <div class="section-header">
+      <h2 class="section-title" style="color:var(--masc)">Coleção Masculina</h2>
+      <span class="section-subtitle gender-product-count">0 peças</span>
+    </div>
+    <div class="filters gender-filter-bar"></div>
+    <div class="products-grid gender-products-grid"></div>
+  </div>
+</div>
+
+<!-- ══ LOJA GERAL ══ -->
 <div id="page-loja" class="page">
   <div class="section">
     <div class="section-header">
       <h2 class="section-title">Nossa Coleção</h2>
       <span class="section-subtitle" id="productCount">0 peças</span>
     </div>
+    <div class="gender-tabs" id="lojaTabs"></div>
     <div class="filters" id="filterBar"></div>
     <div class="products-grid" id="productsGrid"></div>
   </div>
@@ -1008,6 +136,8 @@
 <!-- ══ ADMIN ══ -->
 <div id="page-admin" class="page">
   <div class="admin-layout">
+
+    <!-- Formulário -->
     <div class="admin-form">
       <h3 class="form-title" id="formTitle">Novo Produto</h3>
       <input type="hidden" id="editId">
@@ -1030,15 +160,11 @@
 
       <div class="form-row">
         <div class="form-group">
-          <label>Categoria</label>
-          <select id="pCategoria">
-            <option value="Blusas">Blusas</option>
-            <option value="Vestidos">Vestidos</option>
-            <option value="Calças">Calças</option>
-            <option value="Saias">Saias</option>
-            <option value="Casacos">Casacos</option>
-            <option value="Acessórios">Acessórios</option>
-            <option value="Conjuntos">Conjuntos</option>
+          <label>Gênero</label>
+          <select id="pGenero">
+            <option value="Feminino">Feminino</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Unissex">Unissex</option>
           </select>
         </div>
         <div class="form-group">
@@ -1048,12 +174,48 @@
       </div>
 
       <div class="form-group">
-        <label>Emoji / Ícone</label>
+        <label>Categoria</label>
+        <select id="pCategoria">
+          <option value="Blusas">Blusas</option>
+          <option value="Vestidos">Vestidos</option>
+          <option value="Calças">Calças</option>
+          <option value="Saias">Saias</option>
+          <option value="Casacos">Casacos</option>
+          <option value="Camisas">Camisas</option>
+          <option value="Blazers">Blazers</option>
+          <option value="Polos">Polos</option>
+          <option value="Bermudas">Bermudas</option>
+          <option value="Conjuntos">Conjuntos</option>
+          <option value="Acessórios">Acessórios</option>
+        </select>
+      </div>
+
+      <!-- Imagem do Produto -->
+      <div class="form-group">
+        <label>Imagem do Produto</label>
+        <div class="img-preview-wrap">
+          <img id="imgPreview" class="img-preview" alt="Preview">
+          <div class="img-preview-placeholder" id="imgPlaceholder" onclick="document.getElementById('imgFileInput').click()">
+            📷 Clique para enviar imagem
+          </div>
+          <input type="file" id="imgFileInput" accept="image/*" style="display:none" onchange="handleImageUpload(this)">
+        </div>
+        <div style="margin-top:8px">
+          <label style="margin-bottom:4px">ou URL da imagem</label>
+          <input type="text" id="pImagemUrl" placeholder="https://..." oninput="previewFromUrl(this.value)">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Emoji / Ícone (fallback)</label>
         <select id="pEmoji">
           <option value="👗">👗 Vestido</option>
           <option value="👚">👚 Blusa</option>
           <option value="👖">👖 Calça</option>
           <option value="🧥">🧥 Casaco</option>
+          <option value="👔">👔 Camisa</option>
+          <option value="👕">👕 Polo / Camiseta</option>
+          <option value="🩲">🩲 Bermuda</option>
           <option value="👙">👙 Biquíni</option>
           <option value="🧣">🧣 Cachecol</option>
           <option value="👒">👒 Chapéu</option>
@@ -1080,8 +242,9 @@
       <button class="submit-btn" style="background:var(--cream);color:var(--charcoal);border:1px solid var(--border);margin-top:8px" onclick="cancelarEdicao()">Cancelar</button>
     </div>
 
+    <!-- Painel direito -->
     <div>
-      <!-- PIX Config -->
+      <!-- Config PIX -->
       <div class="admin-config-bar">
         <span class="config-label">Chave PIX:</span>
         <input class="config-input" type="text" id="pixKeyInput" placeholder="CPF, e-mail, telefone ou chave aleatória">
@@ -1098,8 +261,9 @@
         <table>
           <thead>
             <tr>
-              <th></th>
+              <th style="width:60px"></th>
               <th>Nome</th>
+              <th>Gênero</th>
               <th>Categoria</th>
               <th>Preço</th>
               <th>Estoque</th>
@@ -1110,6 +274,7 @@
         </table>
       </div>
     </div>
+
   </div>
 </div>
 
@@ -1119,17 +284,13 @@
     <button class="login-close" onclick="fecharLogin()">✕</button>
     <div class="login-logo">VELOUR</div>
     <div class="login-subtitle">Acesso Administrativo</div>
-
     <label>Usuário</label>
     <input type="text" id="loginUser" placeholder="admin" autocomplete="username">
-
     <label>Senha</label>
     <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password"
       onkeydown="if(event.key==='Enter') fazerLogin()">
-
     <button class="login-btn" onclick="fazerLogin()">Entrar</button>
     <div class="login-error" id="loginError"></div>
-
     <div class="login-hint">
       🔒 <strong>Credenciais padrão:</strong><br>
       Usuário: <strong>admin</strong> &nbsp;|&nbsp; Senha: <strong>velour2025</strong><br>
@@ -1138,7 +299,7 @@
   </div>
 </div>
 
-<!-- ══ MODAL CONFIRMAÇÃO ══ -->
+<!-- ══ MODAL CHECKOUT ══ -->
 <div class="modal-overlay" id="checkoutModal">
   <div class="modal" id="checkoutModalContent"></div>
 </div>
@@ -1146,619 +307,6 @@
 <!-- TOAST -->
 <div id="toast"></div>
 
-<script>
-// ════════════════════════════════════
-//  DATABASE
-// ════════════════════════════════════
-
-const DB_KEY      = 'velour_produtos';
-const CART_KEY    = 'velour_carrinho';
-const AUTH_KEY    = 'velour_auth';
-const CFG_KEY     = 'velour_config';
-const SESSION_KEY = 'velour_session';
-
-function getDB()   { try { return JSON.parse(localStorage.getItem(DB_KEY))  || []; } catch { return []; } }
-function saveDB(d) { localStorage.setItem(DB_KEY, JSON.stringify(d)); }
-function getCart() { try { return JSON.parse(localStorage.getItem(CART_KEY))|| []; } catch { return []; } }
-function saveCart(c){ localStorage.setItem(CART_KEY, JSON.stringify(c)); }
-
-function getAuth() {
-  try { return JSON.parse(localStorage.getItem(AUTH_KEY)); }
-  catch { return null; }
-}
-
-function getConfig() {
-  try { return JSON.parse(localStorage.getItem(CFG_KEY)) || {}; }
-  catch { return {}; }
-}
-
-function saveConfig(c) { localStorage.setItem(CFG_KEY, JSON.stringify(c)); }
-
-function isLoggedIn() { return sessionStorage.getItem(SESSION_KEY) === '1'; }
-
-function uid() { return Date.now().toString(36) + Math.random().toString(36).substr(2,5); }
-
-// Dados iniciais
-function seedDB() {
-  if (getDB().length > 0) return;
-  const prods = [
-    { id: uid(), nome:'Vestido Midi Floral',    categoria:'Vestidos',   preco:189.90, precoAntigo:249.90, estoque:8,  emoji:'👗', desc:'Vestido midi com estampa floral delicada, perfeito para dias quentes.', destaque:true },
-    { id: uid(), nome:'Blusa Linho Premium',     categoria:'Blusas',     preco:129.00, precoAntigo:null,   estoque:15, emoji:'👚', desc:'Blusa em linho natural com caimento impecável.', destaque:true },
-    { id: uid(), nome:'Calça Palazzo Camel',     categoria:'Calças',     preco:219.00, precoAntigo:280.00, estoque:5,  emoji:'👖', desc:'Calça palazzo de alfaiataria na tendência camel da temporada.', destaque:true },
-    { id: uid(), nome:'Casaco Trench Clássico',  categoria:'Casacos',    preco:459.00, precoAntigo:null,   estoque:3,  emoji:'🧥', desc:'Trench coat atemporal que eleva qualquer look.', destaque:true },
-    { id: uid(), nome:'Saia Midi Plissada',      categoria:'Saias',      preco:159.90, precoAntigo:210.00, estoque:12, emoji:'👗', desc:'Saia midi plissada com movimento elegante.', destaque:false },
-    { id: uid(), nome:'Conjunto Linho Rosa',     categoria:'Conjuntos',  preco:299.00, precoAntigo:null,   estoque:7,  emoji:'🩱', desc:'Conjunto de calça e blusa em linho rose.', destaque:false },
-    { id: uid(), nome:'Bolsa Tote Couro',        categoria:'Acessórios', preco:349.00, precoAntigo:420.00, estoque:4,  emoji:'👜', desc:'Bolsa tote em couro legítimo com forro interno.', destaque:false },
-    { id: uid(), nome:'Blusa Cropped Canelada',  categoria:'Blusas',     preco:89.90,  precoAntigo:null,   estoque:0,  emoji:'👚', desc:'Blusa cropped em tecido canelado, básica e versátil.', destaque:false },
-  ];
-  saveDB(prods);
-}
-
-// Auth padrão
-function ensureAuth() {
-  if (!getAuth()) {
-    localStorage.setItem(AUTH_KEY, JSON.stringify({ user:'admin', pass:'velour2025' }));
-  }
-}
-
-// ════════════════════════════════════
-//  NAVIGATION
-// ════════════════════════════════════
-
-function showPage(name) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById('page-' + name).classList.add('active');
-  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
-  const map = { home:0, loja:1, admin:2 };
-  if (map[name] !== undefined) document.querySelectorAll('nav button')[map[name]].classList.add('active');
-  if (name === 'home')     renderHome();
-  if (name === 'loja')     renderLoja();
-  if (name === 'carrinho') renderCarrinho();
-  if (name === 'admin')    renderAdmin();
-  updateCartBadge();
-}
-
-function goAdmin() {
-  if (isLoggedIn()) {
-    showPage('admin');
-  } else {
-    abrirLogin();
-  }
-}
-
-// ════════════════════════════════════
-//  LOGIN
-// ════════════════════════════════════
-
-function abrirLogin() {
-  document.getElementById('loginOverlay').style.display = 'flex';
-  document.getElementById('loginError').textContent = '';
-  document.getElementById('loginUser').value = '';
-  document.getElementById('loginPass').value = '';
-  setTimeout(() => document.getElementById('loginUser').focus(), 100);
-}
-
-function fecharLogin() {
-  document.getElementById('loginOverlay').style.display = 'none';
-}
-
-function fazerLogin() {
-  const user = document.getElementById('loginUser').value.trim();
-  const pass = document.getElementById('loginPass').value;
-  const auth = getAuth();
-
-  if (user === auth.user && pass === auth.pass) {
-    sessionStorage.setItem(SESSION_KEY, '1');
-    document.getElementById('loginOverlay').style.display = 'none';
-    document.getElementById('adminBadge').style.display = 'block';
-    showPage('admin');
-    toast('Bem-vindo, Admin! 🔓');
-  } else {
-    document.getElementById('loginError').textContent = '✕ Usuário ou senha incorretos.';
-    document.getElementById('loginPass').value = '';
-    document.getElementById('loginPass').focus();
-  }
-}
-
-function logout() {
-  sessionStorage.removeItem(SESSION_KEY);
-  document.getElementById('adminBadge').style.display = 'none';
-  showPage('home');
-  toast('Sessão encerrada.');
-}
-
-// ════════════════════════════════════
-//  HOME
-// ════════════════════════════════════
-
-function renderHome() {
-  const prods = getDB();
-  const cart  = getCart();
-
-  document.getElementById('statsBar').innerHTML = `
-    <div class="stat-card">
-      <div class="stat-num">${prods.length}</div>
-      <div class="stat-label">Produtos</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num">${prods.filter(p=>p.estoque>0).length}</div>
-      <div class="stat-label">Disponíveis</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num">${[...new Set(prods.map(p=>p.categoria))].length}</div>
-      <div class="stat-label">Categorias</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num">${cart.reduce((s,i)=>s+i.qty,0)}</div>
-      <div class="stat-label">Itens no Carrinho</div>
-    </div>
-  `;
-
-  const featured = prods.filter(p=>p.destaque).slice(0,4);
-  document.getElementById('featuredGrid').innerHTML = featured.map(p => productCard(p)).join('');
-}
-
-// ════════════════════════════════════
-//  LOJA
-// ════════════════════════════════════
-
-let activeFilter = 'Todos';
-
-function renderLoja() {
-  const prods = getDB();
-  const cats  = ['Todos', ...new Set(prods.map(p=>p.categoria))];
-
-  document.getElementById('filterBar').innerHTML = cats.map(c =>
-    `<button class="filter-btn ${c===activeFilter?'active':''}" onclick="setFilter('${c}')">${c}</button>`
-  ).join('');
-
-  const filtered = activeFilter === 'Todos' ? prods : prods.filter(p=>p.categoria===activeFilter);
-  document.getElementById('productCount').textContent = `${filtered.length} peça${filtered.length!==1?'s':''}`;
-  document.getElementById('productsGrid').innerHTML = filtered.length
-    ? filtered.map(p => productCard(p)).join('')
-    : '<p style="color:var(--muted);grid-column:1/-1;padding:40px 0">Nenhum produto nesta categoria.</p>';
-}
-
-function setFilter(cat) { activeFilter = cat; renderLoja(); }
-
-function productCard(p) {
-  const stockClass = p.estoque===0?'out':p.estoque<=3?'low':'ok';
-  const stockText  = p.estoque===0?'✗ Sem estoque':p.estoque<=3?`⚠ Apenas ${p.estoque} unid.`:`✓ Em estoque (${p.estoque})`;
-  const oldPrice   = p.precoAntigo?`<span class="old-price">R$ ${p.precoAntigo.toFixed(2)}</span>`:'';
-  const badge      = p.precoAntigo?'<span class="product-badge">Promoção</span>':'';
-  return `
-    <div class="product-card">
-      <div class="product-img">
-        ${badge}
-        <span style="font-size:80px">${p.emoji}</span>
-      </div>
-      <div class="product-info">
-        <div class="product-cat">${p.categoria}</div>
-        <div class="product-name">${p.nome}</div>
-        <div class="product-price">${oldPrice}R$ ${p.preco.toFixed(2)}</div>
-        <div class="stock ${stockClass}">${stockText}</div>
-        <button class="add-btn" ${p.estoque===0?'disabled style="opacity:.4;cursor:not-allowed"':''} onclick="addToCart('${p.id}')">
-          ${p.estoque===0?'Indisponível':'Adicionar ao Carrinho'}
-        </button>
-      </div>
-    </div>`;
-}
-
-// ════════════════════════════════════
-//  CART
-// ════════════════════════════════════
-
-function addToCart(id) {
-  const prod = getDB().find(p=>p.id===id);
-  if (!prod || prod.estoque===0) return;
-  let cart = getCart();
-  const idx = cart.findIndex(i=>i.id===id);
-  if (idx>=0) {
-    if (cart[idx].qty>=prod.estoque) { toast('Estoque máximo atingido!'); return; }
-    cart[idx].qty++;
-  } else {
-    cart.push({ id:prod.id, nome:prod.nome, preco:prod.preco, emoji:prod.emoji, qty:1 });
-  }
-  saveCart(cart);
-  updateCartBadge();
-  toast(`"${prod.nome}" adicionado! 🛍️`);
-}
-
-function removeFromCart(id) {
-  saveCart(getCart().filter(i=>i.id!==id));
-  renderCarrinho();
-  updateCartBadge();
-}
-
-function changeQty(id, delta) {
-  let cart = getCart();
-  const idx = cart.findIndex(i=>i.id===id);
-  if (idx<0) return;
-  cart[idx].qty += delta;
-  if (cart[idx].qty<=0) cart.splice(idx,1);
-  saveCart(cart);
-  renderCarrinho();
-  updateCartBadge();
-}
-
-let selectedPayment = 'pix';
-
-function renderCarrinho() {
-  const cart = getCart();
-  const el   = document.getElementById('cartContent');
-
-  if (cart.length===0) {
-    el.innerHTML = `
-      <div class="empty-cart">
-        <div class="empty-cart-icon">🛍️</div>
-        <h3>Seu carrinho está vazio</h3>
-        <p style="color:var(--muted);margin:10px 0 24px">Explore nossa coleção e encontre algo especial.</p>
-        <button class="hero-btn" style="font-size:11px;padding:12px 32px" onclick="showPage('loja')">Ver Coleção</button>
-      </div>`;
-    return;
-  }
-
-  const subtotal = cart.reduce((s,i) => s + i.qty*i.preco, 0);
-  const frete    = subtotal >= 299 ? 0 : 19.90;
-  const total    = subtotal + frete;
-  const cfg      = getConfig();
-  const pixKey   = cfg.pixKey  || 'velour@loja.com.br';
-  const pixName  = cfg.pixName || 'Velour Moda';
-
-  // Simple pixel QR art (CSS only, functional representation)
-  const qrSvg = gerarQRSimples(pixKey + total.toFixed(2));
-
-  el.innerHTML = `
-    <div class="cart-layout">
-      <div>
-        <div class="section-header" style="margin-bottom:20px">
-          <h2 class="section-title">Meu Carrinho</h2>
-          <span class="section-subtitle">${cart.length} ite${cart.length>1?'ns':'m'}</span>
-        </div>
-        <div class="cart-items">
-          ${cart.map(item=>`
-            <div class="cart-item">
-              <div class="cart-item-emoji">${item.emoji}</div>
-              <div>
-                <div class="cart-item-name">${item.nome}</div>
-                <div class="cart-item-price">R$ ${item.preco.toFixed(2)} / unid.</div>
-                <div class="qty-ctrl">
-                  <button class="qty-btn" onclick="changeQty('${item.id}',-1)">−</button>
-                  <span class="qty-num">${item.qty}</span>
-                  <button class="qty-btn" onclick="changeQty('${item.id}',1)">+</button>
-                  <span style="color:var(--muted);font-size:12px;margin-left:8px">= R$ ${(item.qty*item.preco).toFixed(2)}</span>
-                </div>
-              </div>
-              <button class="remove-btn" onclick="removeFromCart('${item.id}')" title="Remover">✕</button>
-            </div>
-          `).join('')}
-        </div>
-      </div>
-
-      <div class="order-summary">
-        <div class="summary-title">Resumo do Pedido</div>
-        <div class="summary-row"><span>Subtotal</span><span>R$ ${subtotal.toFixed(2)}</span></div>
-        <div class="summary-row"><span>Frete</span><span>${frete===0?'🎉 Grátis':'R$ '+frete.toFixed(2)}</span></div>
-        ${frete>0?`<div style="font-size:11px;color:var(--rose);margin-bottom:10px;text-align:right">Faltam R$ ${(299-subtotal).toFixed(2)} para frete grátis</div>`:''}
-        <div class="summary-total"><span>Total</span><span>R$ ${total.toFixed(2)}</span></div>
-
-        <!-- Payment Tabs -->
-        <div class="pay-tabs">
-          <button class="pay-tab pix-tab ${selectedPayment==='pix'?'active':''}" onclick="selectPayment('pix')">
-            <span class="pay-icon">💠</span>PIX
-          </button>
-          <button class="pay-tab ${selectedPayment==='cartao'?'active':''}" onclick="selectPayment('cartao')">
-            <span class="pay-icon">💳</span>Cartão
-          </button>
-          <button class="pay-tab ${selectedPayment==='boleto'?'active':''}" onclick="selectPayment('boleto')">
-            <span class="pay-icon">🧾</span>Boleto
-          </button>
-        </div>
-
-        <!-- PIX Panel -->
-        <div class="pay-panel ${selectedPayment==='pix'?'active':''}" id="panelPix">
-          <div class="pix-box">
-            <div class="pix-logo">💠 Pagamento via PIX</div>
-            <div class="pix-qr" id="pixQrArea">${qrSvg}</div>
-            <div style="font-size:11px;color:#32bcad;font-weight:600;margin-bottom:12px">R$ ${total.toFixed(2)}</div>
-            <div class="pix-key-label">Chave PIX</div>
-            <div class="pix-key-box">
-              <span class="pix-key" id="pixKeyDisplay">${pixKey}</span>
-              <button class="copy-btn" onclick="copiarPix('${pixKey}')">Copiar</button>
-            </div>
-            <div class="pix-info">
-              👤 Favorecido: <strong>${pixName}</strong><br>
-              💰 Valor: <strong>R$ ${total.toFixed(2)}</strong><br>
-              ⏱ Válido por: <strong>30 minutos</strong>
-            </div>
-          </div>
-          <button class="checkout-btn pix-confirm" onclick="finalizarPix('${total.toFixed(2)}','${pixName}','${pixKey}')">
-            ✓ Já Realizei o Pagamento
-          </button>
-        </div>
-
-        <!-- Cartão Panel -->
-        <div class="pay-panel card-panel ${selectedPayment==='cartao'?'active':''}" id="panelCartao">
-          <input type="text" placeholder="Nome no cartão" id="cNome" maxlength="40">
-          <input type="text" placeholder="0000 0000 0000 0000" id="cNum" maxlength="19" oninput="maskCard(this)">
-          <div class="card-row">
-            <input type="text" placeholder="MM/AA" id="cVal" maxlength="5" oninput="maskDate(this)">
-            <input type="text" placeholder="CVV" id="cCVV" maxlength="4" type="password">
-          </div>
-          <button class="checkout-btn" onclick="finalizarCartao()">Pagar R$ ${total.toFixed(2)}</button>
-        </div>
-
-        <!-- Boleto Panel -->
-        <div class="pay-panel ${selectedPayment==='boleto'?'active':''}" id="panelBoleto">
-          <div style="background:var(--cream);border:1px solid var(--border);border-radius:4px;padding:16px;margin-bottom:10px;font-size:12px;line-height:1.9;color:var(--muted)">
-            🧾 Um boleto bancário será gerado após confirmação.<br>
-            📅 Vencimento: <strong style="color:var(--charcoal)">3 dias úteis</strong><br>
-            💰 Valor: <strong style="color:var(--charcoal)">R$ ${total.toFixed(2)}</strong><br>
-            ⚠️ Após o pagamento, confirmação em até 2 dias úteis.
-          </div>
-          <button class="checkout-btn" onclick="finalizarBoleto('${total.toFixed(2)}')">Gerar Boleto</button>
-        </div>
-
-        <button onclick="showPage('loja')" style="width:100%;background:none;border:none;cursor:pointer;margin-top:12px;font-size:11px;color:var(--muted);font-family:'Montserrat',sans-serif;letter-spacing:1px;padding:8px">← Continuar Comprando</button>
-      </div>
-    </div>`;
-}
-
-function selectPayment(method) {
-  selectedPayment = method;
-  renderCarrinho();
-}
-
-function copiarPix(chave) {
-  navigator.clipboard.writeText(chave).then(() => toast('Chave PIX copiada! 📋')).catch(() => toast('Chave: ' + chave));
-}
-
-function maskCard(el) {
-  let v = el.value.replace(/\D/g,'').substr(0,16);
-  el.value = v.replace(/(.{4})/g,'$1 ').trim();
-}
-
-function maskDate(el) {
-  let v = el.value.replace(/\D/g,'').substr(0,4);
-  if (v.length>=3) v = v.substr(0,2)+'/'+v.substr(2);
-  el.value = v;
-}
-
-function finalizarPix(total, nome, chave) {
-  const content = document.getElementById('checkoutModalContent');
-  content.innerHTML = `
-    <div class="modal-emoji">💠</div>
-    <h3>Aguardando Confirmação PIX</h3>
-    <p>Se ainda não pagou, utilize os dados abaixo:</p>
-    <div class="modal-pix-detail">
-      👤 Favorecido: <strong>${nome}</strong><br>
-      🔑 Chave PIX: <strong>${chave}</strong><br>
-      💰 Valor: <strong>R$ ${total}</strong>
-    </div>
-    <p style="font-size:11px">Após o pagamento, seu pedido será processado automaticamente.</p>
-    <div class="modal-btns">
-      <button class="modal-btn primary" onclick="confirmarPedido()">Confirmar Pedido</button>
-      <button class="modal-btn secondary" onclick="closeModal()">Voltar</button>
-    </div>`;
-  document.getElementById('checkoutModal').classList.add('open');
-}
-
-function finalizarCartao() {
-  const nome = (document.getElementById('cNome')||{}).value||'';
-  const num  = (document.getElementById('cNum')||{}).value||'';
-  const val  = (document.getElementById('cVal')||{}).value||'';
-  const cvv  = (document.getElementById('cCVV')||{}).value||'';
-
-  if (!nome||num.replace(/\s/g,'').length<16||val.length<5||!cvv) {
-    toast('Preencha todos os dados do cartão!'); return;
-  }
-
-  const content = document.getElementById('checkoutModalContent');
-  content.innerHTML = `
-    <div class="modal-emoji">✅</div>
-    <h3>Pagamento Aprovado!</h3>
-    <p>Seu cartão foi processado com sucesso.<br>Você receberá a confirmação por e-mail em breve.</p>
-    <div class="modal-btns">
-      <button class="modal-btn primary" onclick="confirmarPedido()">Continuar Comprando</button>
-    </div>`;
-  document.getElementById('checkoutModal').classList.add('open');
-}
-
-function finalizarBoleto(total) {
-  const codigoBoleto = '0000.00001 00000.000002 00000.000003 0 ' + Date.now().toString().substr(-5);
-  const content = document.getElementById('checkoutModalContent');
-  content.innerHTML = `
-    <div class="modal-emoji">🧾</div>
-    <h3>Boleto Gerado!</h3>
-    <p>Código de barras do seu boleto:</p>
-    <div style="background:var(--cream);border:1px solid var(--border);border-radius:4px;padding:14px;font-size:11px;font-weight:600;letter-spacing:1px;color:var(--charcoal);margin:12px 0;word-break:break-all">
-      ${codigoBoleto}
-    </div>
-    <p style="font-size:11px">💰 Valor: <strong>R$ ${total}</strong> &nbsp;|&nbsp; 📅 Vence em 3 dias úteis</p>
-    <div class="modal-btns">
-      <button class="modal-btn primary" onclick="confirmarPedido()">OK, Entendido</button>
-    </div>`;
-  document.getElementById('checkoutModal').classList.add('open');
-}
-
-function confirmarPedido() {
-  saveCart([]);
-  updateCartBadge();
-  closeModal();
-  showPage('loja');
-  toast('Pedido confirmado! Obrigada 💛');
-}
-
-function closeModal() {
-  document.getElementById('checkoutModal').classList.remove('open');
-}
-
-function updateCartBadge() {
-  document.getElementById('cartCount').textContent = getCart().reduce((s,i)=>s+i.qty,0);
-}
-
-// QR Code simples (representação visual)
-function gerarQRSimples(seed) {
-  // Gera um padrão de pixels pseudo-aleatório baseado na seed para simular um QR
-  let hash = 0;
-  for (let i=0; i<seed.length; i++) { hash = ((hash<<5)-hash)+seed.charCodeAt(i); hash|=0; }
-  const size = 15;
-  let cells = '';
-  for (let r=0; r<size; r++) {
-    for (let c=0; c<size; c++) {
-      // Cantos fixos (finder patterns)
-      const inCorner = (r<3&&c<3)||(r<3&&c>size-4)||(r>size-4&&c<3);
-      const onBorder = (r===0||r===size-1||c===0||c===size-1);
-      let fill;
-      if (inCorner || onBorder) {
-        fill = '#000';
-      } else {
-        const bit = (hash ^ (r*17+c*31)) & (1<<((r+c)%31));
-        fill = bit ? '#000' : '#fff';
-      }
-      cells += `<rect x="${c*8}" y="${r*8}" width="8" height="8" fill="${fill}"/>`;
-    }
-  }
-  return `<svg width="120" height="120" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
-    <rect width="120" height="120" fill="white"/>
-    ${cells}
-  </svg>`;
-}
-
-// ════════════════════════════════════
-//  ADMIN
-// ════════════════════════════════════
-
-function renderAdmin() {
-  if (!isLoggedIn()) { abrirLogin(); return; }
-
-  const prods = getDB();
-  const cfg   = getConfig();
-
-  document.getElementById('pixKeyInput').value  = cfg.pixKey  || '';
-  document.getElementById('pixNameInput').value = cfg.pixName || '';
-  document.getElementById('adminCount').textContent = `${prods.length} produto${prods.length!==1?'s':''}`;
-  document.getElementById('adminBadge').style.display = 'block';
-
-  document.getElementById('adminTable').innerHTML = prods.map(p=>`
-    <tr>
-      <td class="td-emoji">${p.emoji}</td>
-      <td>
-        <strong>${p.nome}</strong>
-        ${p.destaque?'<span style="font-size:9px;background:var(--gold);color:var(--deep);padding:2px 8px;border-radius:2px;margin-left:8px;font-weight:700;letter-spacing:1px">DESTAQUE</span>':''}
-        <br><span style="font-size:11px;color:var(--muted)">${p.desc?p.desc.substr(0,50)+'...':''}</span>
-      </td>
-      <td><span style="background:var(--cream);padding:3px 10px;border-radius:2px;font-size:11px">${p.categoria}</span></td>
-      <td>
-        R$ ${p.preco.toFixed(2)}
-        ${p.precoAntigo?`<br><span style="font-size:10px;color:var(--muted);text-decoration:line-through">R$ ${p.precoAntigo.toFixed(2)}</span>`:''}
-      </td>
-      <td>
-        <span style="color:${p.estoque===0?'var(--danger)':p.estoque<=3?'var(--rose)':'var(--success)'}">
-          ${p.estoque} un.
-        </span>
-      </td>
-      <td>
-        <div class="action-btns">
-          <button class="edit-btn" onclick="editarProduto('${p.id}')">Editar</button>
-          <button class="del-btn"  onclick="deletarProduto('${p.id}')">Excluir</button>
-        </div>
-      </td>
-    </tr>
-  `).join('') || '<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--muted)">Nenhum produto cadastrado.</td></tr>';
-}
-
-function salvarConfigPix() {
-  const cfg = getConfig();
-  cfg.pixKey  = document.getElementById('pixKeyInput').value.trim();
-  cfg.pixName = document.getElementById('pixNameInput').value.trim();
-  saveConfig(cfg);
-  toast('Configurações PIX salvas! 💠');
-}
-
-function salvarProduto() {
-  if (!isLoggedIn()) { abrirLogin(); return; }
-  const id          = document.getElementById('editId').value;
-  const nome        = document.getElementById('pNome').value.trim();
-  const preco       = parseFloat(document.getElementById('pPreco').value);
-  const precoAntigo = parseFloat(document.getElementById('pPrecoAntigo').value)||null;
-  const categoria   = document.getElementById('pCategoria').value;
-  const estoque     = parseInt(document.getElementById('pEstoque').value)||0;
-  const emoji       = document.getElementById('pEmoji').value;
-  const desc        = document.getElementById('pDesc').value.trim();
-  const destaque    = document.getElementById('pDestaque').value==='true';
-
-  if (!nome||isNaN(preco)) { toast('Preencha nome e preço!'); return; }
-
-  let prods = getDB();
-  if (id) {
-    const idx = prods.findIndex(p=>p.id===id);
-    if (idx>=0) prods[idx] = {...prods[idx], nome, preco, precoAntigo, categoria, estoque, emoji, desc, destaque};
-    toast('Produto atualizado! ✓');
-  } else {
-    prods.push({ id:uid(), nome, preco, precoAntigo, categoria, estoque, emoji, desc, destaque });
-    toast('Produto cadastrado! ✓');
-  }
-
-  saveDB(prods);
-  limparForm();
-  renderAdmin();
-}
-
-function editarProduto(id) {
-  const prod = getDB().find(p=>p.id===id);
-  if (!prod) return;
-  document.getElementById('editId').value    = prod.id;
-  document.getElementById('pNome').value     = prod.nome;
-  document.getElementById('pPreco').value    = prod.preco;
-  document.getElementById('pPrecoAntigo').value = prod.precoAntigo||'';
-  document.getElementById('pCategoria').value= prod.categoria;
-  document.getElementById('pEstoque').value  = prod.estoque;
-  document.getElementById('pEmoji').value    = prod.emoji;
-  document.getElementById('pDesc').value     = prod.desc;
-  document.getElementById('pDestaque').value = prod.destaque?'true':'false';
-  document.getElementById('formTitle').textContent = 'Editar Produto';
-  window.scrollTo({top:0, behavior:'smooth'});
-}
-
-function cancelarEdicao() { limparForm(); }
-
-function limparForm() {
-  ['editId','pNome','pPreco','pPrecoAntigo','pEstoque','pDesc'].forEach(id => {
-    document.getElementById(id).value = '';
-  });
-  document.getElementById('pDestaque').value = 'false';
-  document.getElementById('formTitle').textContent = 'Novo Produto';
-}
-
-function deletarProduto(id) {
-  if (!confirm('Tem certeza que deseja excluir este produto?')) return;
-  saveDB(getDB().filter(p=>p.id!==id));
-  renderAdmin();
-  toast('Produto excluído.');
-}
-
-// ════════════════════════════════════
-//  TOAST
-// ════════════════════════════════════
-
-let toastTimer;
-function toast(msg) {
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=>el.classList.remove('show'), 2800);
-}
-
-// ════════════════════════════════════
-//  INIT
-// ════════════════════════════════════
-
-ensureAuth();
-seedDB();
-showPage('home');
-if (isLoggedIn()) document.getElementById('adminBadge').style.display = 'block';
-</script>
+<script src="script.js"></script>
 </body>
 </html>
